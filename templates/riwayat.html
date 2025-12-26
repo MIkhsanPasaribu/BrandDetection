@@ -1,0 +1,84 @@
+{% extends "base.html" %} {% block title %}Riwayat Deteksi - Sistem Deteksi
+Merek{% endblock %} {% block content %}
+<div class="page-header">
+  <h2 class="page-title">📜 Riwayat Deteksi</h2>
+  <p class="page-description">
+    Daftar semua deteksi brand yang telah dilakukan beserta informasi
+    lengkapnya.
+  </p>
+</div>
+
+<div class="riwayat-section">
+  {% if riwayat and riwayat|length > 0 %}
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Gambar</th>
+          <th>Brand Terdeteksi</th>
+          <th>Confidence</th>
+          <th>Resolusi</th>
+          <th>Waktu Upload</th>
+          <th>Catatan</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in riwayat %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td class="cell-filename">{{ item.image_name }}</td>
+          <td class="cell-brand">
+            {% if item.brand_name %}
+            <span class="badge badge-brand">{{ item.brand_name }}</span>
+            {% else %}
+            <span class="badge badge-no-brand">Tidak Ada</span>
+            {% endif %}
+          </td>
+          <td class="cell-confidence">
+            {% if item.confidence %}
+            <div class="confidence-bar-container">
+              <div
+                class="confidence-bar"
+                style="width: {{ (item.confidence * 100)|round(2) }}%;"
+              ></div>
+              <span class="confidence-text"
+                >{{ format_confidence(item.confidence) }}</span
+              >
+            </div>
+            {% else %}
+            <span class="text-muted">N/A</span>
+            {% endif %}
+          </td>
+          <td>{{ item.resolution if item.resolution else 'N/A' }}</td>
+          <td class="cell-timestamp">
+            {% if item.timestamp %} {{ item.timestamp[:19].replace('T', ' ') }}
+            {% else %} N/A {% endif %}
+          </td>
+          <td class="cell-notes">
+            <span class="notes-text"
+              >{{ item.notes[:50] if item.notes else '-' }}</span
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="riwayat-info">
+    <p>Total: <strong>{{ riwayat|length }}</strong> record ditampilkan</p>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📭</div>
+    <h3>Belum Ada Riwayat</h3>
+    <p>
+      Belum ada deteksi yang dilakukan. Mulai dengan mengupload gambar di
+      halaman beranda.
+    </p>
+    <a href="{{ url_for('beranda') }}" class="btn btn-primary">Upload Gambar</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

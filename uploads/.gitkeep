@@ -1,0 +1,2 @@
+# File ini memastikan folder uploads ada di git
+# tapi isinya diabaikan (lihat .gitignore)

@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block title %}Statistik - Sistem Deteksi Merek{%
+endblock %} {% block content %}
+<div class="page-header">
+  <h2 class="page-title">📊 Statistik Deteksi</h2>
+  <p class="page-description">Analisis dan statistik hasil deteksi brand.</p>
+</div>
+
+<div class="statistik-section">
+  {% if statistik %}
+  <!-- Statistik Umum -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">🔢</div>
+      <div class="stat-content">
+        <h3 class="stat-number">
+          {{ statistik.total_deteksi if statistik.total_deteksi else 0 }}
+        </h3>
+        <p class="stat-label">Total Deteksi</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🏷️</div>
+      <div class="stat-content">
+        <h3 class="stat-number">
+          {{ statistik.jumlah_brand_unik if statistik.jumlah_brand_unik else 0
+          }}
+        </h3>
+        <p class="stat-label">Brand Unik</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📈</div>
+      <div class="stat-content">
+        <h3 class="stat-number">
+          {% if statistik.rata_confidence %} {{ (statistik.rata_confidence *
+          100)|round(2) }}% {% else %} 0% {% endif %}
+        </h3>
+        <p class="stat-label">Rata-rata Confidence</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand Populer -->
+  {% if statistik.brand_populer and statistik.brand_populer|length > 0 %}
+  <div class="popular-brands">
+    <h3 class="section-title">🏆 Brand Paling Sering Terdeteksi</h3>
+    <div class="brand-list">
+      {% for brand in statistik.brand_populer %}
+      <div class="brand-item">
+        <div class="brand-rank">{{ loop.index }}</div>
+        <div class="brand-info">
+          <h4 class="brand-name">{{ brand.brand }}</h4>
+          <p class="brand-count">{{ brand.jumlah }} deteksi</p>
+        </div>
+        <div class="brand-bar">
+          <div
+            class="brand-bar-fill"
+            style="width: {{ (brand.jumlah / statistik.brand_populer[0].jumlah * 100)|round(2) if statistik.brand_populer else 0 }}%"
+          ></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %} {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📊</div>
+    <h3>Belum Ada Data Statistik</h3>
+    <p>Statistik akan ditampilkan setelah ada deteksi yang dilakukan.</p>
+    <a href="{{ url_for('beranda') }}" class="btn btn-primary">Mulai Deteksi</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

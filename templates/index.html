@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block title %}Beranda - Sistem Deteksi Merek{%
+endblock %} {% block content %}
+<div class="page-header">
+  <h2 class="page-title">🔍 Deteksi Merek dari Gambar</h2>
+  <p class="page-description">
+    Upload gambar yang mengandung logo atau merek, dan sistem akan mendeteksi
+    brand secara otomatis menggunakan AI.
+  </p>
+</div>
+
+<div class="upload-section">
+  <div class="upload-card">
+    <h3 class="section-title">📤 Upload Gambar</h3>
+
+    <form id="formUpload" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="inputGambar" class="form-label">Pilih Gambar</label>
+        <input
+          type="file"
+          id="inputGambar"
+          name="gambar"
+          accept="image/*"
+          class="form-input"
+          required
+        />
+        <p class="form-help">Format: JPG, JPEG, PNG, GIF | Maksimal: 16 MB</p>
+      </div>
+
+      <div id="previewGambar" class="image-preview" style="display: none">
+        <img id="imgPreview" src="" alt="Preview" />
+      </div>
+
+      <button type="submit" id="btnDeteksi" class="btn btn-primary">
+        <span class="btn-text">🔍 Deteksi Brand</span>
+        <span class="btn-loading" style="display: none">⏳ Memproses...</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="hasilDeteksi" class="results-section" style="display: none">
+  <div class="results-card">
+    <h3 class="section-title">✅ Hasil Deteksi</h3>
+    <div id="containerHasil"></div>
+  </div>
+</div>
+
+<div class="info-section">
+  <div class="info-card-grid">
+    <div class="info-card-item">
+      <div class="info-icon">🎯</div>
+      <h4>Deteksi Akurat</h4>
+      <p>
+        Menggunakan Azure Computer Vision untuk deteksi brand dengan tingkat
+        akurasi tinggi
+      </p>
+    </div>
+    <div class="info-card-item">
+      <div class="info-icon">💾</div>
+      <h4>Riwayat Tersimpan</h4>
+      <p>Semua hasil deteksi tersimpan di database untuk analisis dan review</p>
+    </div>
+    <div class="info-card-item">
+      <div class="info-icon">⚡</div>
+      <h4>Proses Cepat</h4>
+      <p>Hasil deteksi didapatkan dalam hitungan detik</p>
+    </div>
+    <div class="info-card-item">
+      <div class="info-icon">🔒</div>
+      <h4>Aman & Terpercaya</h4>
+      <p>Menggunakan infrastruktur cloud Azure yang secure</p>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="{{ url_for('static', filename='js/deteksi.js') }}"></script>
+{% endblock %}

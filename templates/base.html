@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Sistem Deteksi Merek{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    <!-- Header dengan identitas mahasiswa -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo-section">
+            <h1 class="logo">🔍 Brand Detection</h1>
+            <p class="tagline">Sistem Deteksi Merek dengan AI</p>
+          </div>
+          <div class="student-info">
+            <div class="info-card">
+              <p class="student-name">{{ info_pengembang.nama }}</p>
+              <p class="student-details">NIM: {{ info_pengembang.nim }}</p>
+              <p class="student-details">{{ info_pengembang.prodi }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <ul class="nav-menu">
+          <li>
+            <a
+              href="{{ url_for('beranda') }}"
+              class="nav-link {% if request.endpoint == 'beranda' %}active{% endif %}"
+              >🏠 Beranda</a
+            >
+          </li>
+          <li>
+            <a
+              href="{{ url_for('riwayat') }}"
+              class="nav-link {% if request.endpoint == 'riwayat' %}active{% endif %}"
+              >📜 Riwayat</a
+            >
+          </li>
+          <li>
+            <a
+              href="{{ url_for('statistik') }}"
+              class="nav-link {% if request.endpoint == 'statistik' %}active{% endif %}"
+              >📊 Statistik</a
+            >
+          </li>
+          <li>
+            <a
+              href="{{ url_for('tim_pengembang') }}"
+              class="nav-link {% if request.endpoint == 'tim_pengembang' %}active{% endif %}"
+              >👥 Tim Pengembang</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">{% block content %}{% endblock %}</div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Sistem Deteksi Merek</h3>
+            <p>
+              Aplikasi deteksi brand/logo menggunakan Azure Computer Vision API
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3>Pengembang</h3>
+            <p><strong>{{ info_pengembang.nama }}</strong></p>
+            <p>NIM: {{ info_pengembang.nim }}</p>
+            <p>{{ info_pengembang.prodi }}</p>
+          </div>
+          <div class="footer-section">
+            <h3>Teknologi</h3>
+            <p>Flask • Azure Computer Vision</p>
+            <p>Azure SQL Database • Python</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; {{ tahun_sekarang }} {{ info_pengembang.nama }}. Tugas Cloud
+            Computing.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

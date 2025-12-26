@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}500 - Error Server{% endblock %} {%
+block content %}
+<div class="error-page">
+  <div class="error-container">
+    <div class="error-code">500</div>
+    <h2 class="error-title">Internal Server Error</h2>
+    <p class="error-description">
+      Maaf, terjadi kesalahan pada server. Tim kami sedang berusaha
+      memperbaikinya. Silakan coba lagi nanti.
+    </p>
+    <div class="error-actions">
+      <a href="{{ url_for('beranda') }}" class="btn btn-primary"
+        >Kembali ke Beranda</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

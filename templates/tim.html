@@ -1,0 +1,118 @@
+{% extends "base.html" %} {% block title %}Tim Pengembang - Sistem Deteksi
+Merek{% endblock %} {% block content %}
+<div class="page-header">
+  <h2 class="page-title">👥 Tim Pengembang</h2>
+  <p class="page-description">
+    Informasi tentang pengembang aplikasi Sistem Deteksi Merek.
+  </p>
+</div>
+
+<div class="tim-section">
+  <div class="developer-card">
+    <div class="developer-avatar">
+      <div class="avatar-circle">
+        <span class="avatar-initials"
+          >{{ info_pengembang.nama.split()[0][0] }}{{
+          info_pengembang.nama.split()[1][0] if
+          info_pengembang.nama.split()|length > 1 else '' }}</span
+        >
+      </div>
+    </div>
+    <div class="developer-info">
+      <h3 class="developer-name">{{ info_pengembang.nama }}</h3>
+      <p class="developer-role">Full-Stack Developer</p>
+      <div class="developer-details">
+        <div class="detail-item">
+          <span class="detail-label">NIM:</span>
+          <span class="detail-value">{{ info_pengembang.nim }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Program Studi:</span>
+          <span class="detail-value">{{ info_pengembang.prodi }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-info">
+    <h3 class="section-title">📋 Tentang Proyek</h3>
+    <div class="project-card">
+      <h4>Sistem Deteksi Merek (Brand Detection)</h4>
+      <p>
+        Aplikasi web berbasis cloud computing untuk mendeteksi logo atau merek
+        (brand) pada gambar menggunakan Azure Computer Vision API. Sistem ini
+        memungkinkan pengguna mengunggah foto produk dan secara otomatis
+        mendeteksi merek yang ada dalam gambar tersebut.
+      </p>
+
+      <h5>🎯 Tujuan Proyek:</h5>
+      <ul class="project-list">
+        <li>Mendeteksi logo/merek secara otomatis dari gambar yang diunggah</li>
+        <li>Menyimpan hasil deteksi ke database Azure SQL</li>
+        <li>
+          Melakukan eksperimen untuk menguji ketahanan AI terhadap berbagai
+          kondisi gambar
+        </li>
+        <li>Deploy aplikasi ke Azure Virtual Machine</li>
+      </ul>
+
+      <h5>🛠️ Teknologi yang Digunakan:</h5>
+      <div class="tech-stack">
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">Flask</span>
+        <span class="tech-badge">Azure Computer Vision</span>
+        <span class="tech-badge">Azure SQL Database</span>
+        <span class="tech-badge">HTML5/CSS3</span>
+        <span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">Azure Cloud</span>
+      </div>
+
+      <h5>✨ Fitur Utama:</h5>
+      <ul class="project-list">
+        <li>
+          <strong>Deteksi Brand Otomatis:</strong> Menggunakan AI untuk
+          mengenali logo dan merek dalam gambar
+        </li>
+        <li>
+          <strong>Penyimpanan Database:</strong> Semua hasil deteksi tersimpan
+          untuk analisis
+        </li>
+        <li>
+          <strong>Riwayat Lengkap:</strong> Lihat semua deteksi yang pernah
+          dilakukan
+        </li>
+        <li>
+          <strong>Statistik:</strong> Analisis data deteksi dengan visualisasi
+        </li>
+        <li>
+          <strong>Responsive Design:</strong> Dapat diakses dari berbagai
+          perangkat
+        </li>
+      </ul>
+
+      <h5>📚 Mata Kuliah:</h5>
+      <p>
+        <strong>Cloud Computing</strong> - Implementasi teknologi cloud untuk
+        aplikasi AI
+      </p>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <h3 class="section-title">📞 Kontak</h3>
+    <div class="contact-card">
+      <p>Untuk informasi lebih lanjut tentang proyek ini, silakan hubungi:</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <span class="contact-text">Email Institusi</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">🏫</span>
+          <span class="contact-text">{{ info_pengembang.prodi }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
